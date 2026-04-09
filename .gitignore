@@ -1,0 +1,28 @@
+# =============================================================================
+# Editor and Platform Files
+# =============================================================================
+
+# macOS
+._*
+
+# Kate editor
+*.kate-swp
+.kate-swp
+
+# Aider (AI coding assistant)
+.aider*
+
+# Log files
+*.log
+
+# =============================================================================
+# Build Output & Target Directories
+# =============================================================================
+
+# Zig compiler cache and build output
+.zig-cache/
+zig-cache/
+zig-out/
+
+# Generated Zig dependency map (make $(ZIG_DEPEND_FILE))
+zig.depend
