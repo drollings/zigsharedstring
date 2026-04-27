@@ -337,10 +337,11 @@ pub const SharedString = struct {
             const dup = try allocator.dupe(u8, self.ptr.slice());
             // Atomically transition strong 1 → 0.  Fails if a concurrent
             // Weak.upgrade() bumped strong to 2 between the load and here.
-            if (self.ptr.strong_count.cmpxchgStrong(1, 0, .acquire, .monotonic) != null) {
+            if (self.ptr.strong_count.cmpxchgStrong(1, 0, .release, .monotonic) != null) {
                 allocator.free(dup);
                 return null;
             }
+            _ = self.ptr.strong_count.load(.acquire);
             self.ptr.zeroBytes();
             self.ptr.releaseWeak(allocator);
             return dup;
